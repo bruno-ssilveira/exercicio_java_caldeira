@@ -20,7 +20,6 @@ public class exercicio01 {
 
             int primos = n1 + 1;
             System.out.println(primos);
-            n1 += 1;
         }
 
     }
