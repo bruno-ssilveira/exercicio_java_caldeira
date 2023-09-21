@@ -2,14 +2,14 @@ import java.time.LocalTime;
 public class ContaBancaria {
         private String nome;
         private int cpf;
-        private int identificadorConta;
+        private int identifConta;
         private String banco;
         private String endereco;
         private double saldo;
 
         public LocalTime horarioAtual = LocalTime.now();
         public LocalTime manha = LocalTime.of(8, 00);
-        public LocalTime noite = LocalTime.of(18, 00);
+        public LocalTime noite = LocalTime.of(19, 00);
         boolean antes = horarioAtual.isBefore(noite);
         boolean depois = horarioAtual.isAfter(manha);
 
@@ -50,19 +50,16 @@ public class ContaBancaria {
 
         }
 
-        public double verificarSaldo() {
+        public void verificarSaldo() {
                 System.out.println("O saldo atual é de: R$" + this.saldo);
-                return verificarSaldo();
         }
 
-        public double verificarHorario() {
+        public void verificarHorario() {
                 System.out.println(horarioAtual);
-                return verificarHorario();
         }
 
-        public String verificarInformacoes() {
-                System.out.println("Nome: " + this.nome + System.lineSeparator() + "CPF " + this.cpf + System.lineSeparator() + "Conta: " + this.identificadorConta + System.lineSeparator() + "Banco " + this.banco + System.lineSeparator() + "Endereço: " + this.endereco + System.lineSeparator() + "Saldo: R$" + this.saldo);
-                return verificarInformacoes();
+        public void verificarInformacoes() {
+                System.out.println("Nome: " + this.nome + System.lineSeparator() + "CPF " + this.cpf + System.lineSeparator() + "Conta: " + this.identifConta + System.lineSeparator() + "Banco " + this.banco + System.lineSeparator() + "Endereço: " + this.endereco + System.lineSeparator() + "Saldo: R$" + this.saldo);
         }
 
         public boolean validaCpf(String cpf) {
@@ -71,6 +68,22 @@ public class ContaBancaria {
                 } else {
                         return true;
                 }
+        }
+
+        public void iniciarConta(String nome, int cpf, int identifConta, String banco, String endereco) {
+                this.nome = nome;
+                this.cpf = cpf;
+                this.identifConta = identifConta;
+                this.banco = banco;
+                this.endereco = endereco;
+        }
+
+       public void alterarEndereco(String novoEndereco) {
+                this.endereco = novoEndereco;
+       }
+
+        public String getEndereco() {
+                return this.endereco;
         }
 }
 
