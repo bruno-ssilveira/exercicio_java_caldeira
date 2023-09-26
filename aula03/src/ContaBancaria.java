@@ -1,17 +1,32 @@
 import java.time.LocalTime;
+import java.time.LocalDate;
+import java.util.ArrayList;
 public class ContaBancaria {
         private String nome;
-        private int cpf;
-        private int identifConta;
+        private String cpf;
+        private int indetificadorConta;
         private String banco;
         private String endereco;
         private double saldo;
+        private double taxaDeManutencaoMensal;
+
+        public ContaBancaria(String nome, String cpf, int identificadorConta, String banco, String endereco) {
+                this.nome = nome;
+                this.cpf = cpf;
+                this.indetificadorConta = identificadorConta;
+                this.banco = banco;
+                this.endereco = endereco;
+        }
 
         public LocalTime horarioAtual = LocalTime.now();
         public LocalTime manha = LocalTime.of(8, 00);
         public LocalTime noite = LocalTime.of(19, 00);
         boolean antes = horarioAtual.isBefore(noite);
         boolean depois = horarioAtual.isAfter(manha);
+
+        public LocalDate dataAtual = LocalDate.now();
+
+        ArrayList listaDeOperacoes = new ArrayList<>();
 
         public void saque(double valor) {
                 if (this.saldo >= valor) {
@@ -59,7 +74,7 @@ public class ContaBancaria {
         }
 
         public void verificarInformacoes() {
-                System.out.println("Nome: " + this.nome + System.lineSeparator() + "CPF " + this.cpf + System.lineSeparator() + "Conta: " + this.identifConta + System.lineSeparator() + "Banco " + this.banco + System.lineSeparator() + "Endereço: " + this.endereco + System.lineSeparator() + "Saldo: R$" + this.saldo);
+                System.out.println("Nome: " + this.nome + System.lineSeparator() + "CPF " + this.cpf + System.lineSeparator() + "Conta: " + this.indetificadorConta + System.lineSeparator() + "Banco " + this.banco + System.lineSeparator() + "Endereço: " + this.endereco + System.lineSeparator() + "Saldo: R$" + this.saldo);
         }
 
         public boolean validaCpf(String cpf) {
@@ -70,14 +85,6 @@ public class ContaBancaria {
                 }
         }
 
-        public void iniciarConta(String nome, int cpf, int identifConta, String banco, String endereco) {
-                this.nome = nome;
-                this.cpf = cpf;
-                this.identifConta = identifConta;
-                this.banco = banco;
-                this.endereco = endereco;
-        }
-
        public void alterarEndereco(String novoEndereco) {
                 this.endereco = novoEndereco;
        }
@@ -85,14 +92,32 @@ public class ContaBancaria {
         public String getEndereco() {
                 return this.endereco;
         }
+
+        public double getTaxaDeManutencaoMensal() {
+                return taxaDeManutencaoMensal;
+        }
+
+        public void setTaxaDeManutencaoMensal(double taxaDeManutencaoMensal) {
+                this.taxaDeManutencaoMensal = taxaDeManutencaoMensal;
+        }
+
+        public void descontaTaxaManutencaoMensal() {
+                if (dataAtual.getDayOfMonth() == 1) {
+                        this.saldo -= taxaDeManutencaoMensal;
+                }
+        }
+
+        public void calcularJuros(double taxa) {
+                if (dataAtual.getDayOfMonth() == 1) {
+                        this.saldo *= taxa;
+                }
+        }
+
+        public void fecharConta() {
+                this.saldo = 0;
+                if (saldo > 0) {
+                        this.saldo = 0;
+                        System.out.println("Esta conta não existe!");
+                }
+        }
 }
-
-
-
-
-
-
-
-
-
-
