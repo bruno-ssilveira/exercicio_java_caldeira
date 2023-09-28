@@ -1,6 +1,9 @@
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
+import java.text.SimpleDateFormat;
 public class ContaBancaria {
         private String nome;
         private String cpf;
@@ -26,7 +29,24 @@ public class ContaBancaria {
 
         public LocalDate dataAtual = LocalDate.now();
 
-        ArrayList listaDeOperacoes = new ArrayList<>();
+        ArrayList<String> listaDeTransacoes = new ArrayList<String>();
+
+        public void adicionaTransacao(String transacao) {
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                String dataHora = String.valueOf(LocalDateTime.now());
+                listaDeTransacoes.add(dataHora + " - " + transacao);
+        }
+
+        public void historicoDeTransacao() {
+                if (listaDeTransacoes.isEmpty()) {
+                        System.out.println("Não há operações registradas.");
+                } else {
+                        System.out.println("Histórico de transações: ");
+                        for (String transacao : listaDeTransacoes) {
+                                System.out.println(transacao);
+                        }
+                }
+        }
 
         public void saque(double valor) {
                 if (this.saldo >= valor) {
@@ -34,10 +54,12 @@ public class ContaBancaria {
                 } else {
                         System.out.println("Saldo insuficiente!");
                 }
+                adicionaTransacao("Saque de R$" + valor);
         }
 
         public void deposito(double valor) {
             this.saldo = saldo + valor;
+            adicionaTransacao("Deposito de R$" + valor);
         }
 
         public void pix(double valor, ContaBancaria destino) {
@@ -45,6 +67,7 @@ public class ContaBancaria {
                         this.saldo -= valor;
                         destino.deposito(valor);
                         System.out.println("Pix realizado com sucesso! " + horarioAtual);
+                        adicionaTransacao("Pix realizado de R$" + valor);
                 } else {
                         System.out.println("Saldo insuficiente!");
                 }
@@ -56,6 +79,7 @@ public class ContaBancaria {
                         if (antes && depois) {
                                 this.saldo -= valor;
                                 destino.deposito(valor);
+                                adicionaTransacao("Transferência realizada de R$" + valor);
                         } else {
                                 System.out.println("Fora do horário de funcionamento do Banco! [8h-18h]");
                         }

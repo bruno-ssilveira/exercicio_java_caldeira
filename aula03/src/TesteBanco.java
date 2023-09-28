@@ -35,6 +35,12 @@ public class TesteBanco {
         conta.deposito(100);
         conta.fecharConta();
         conta.verificarSaldo();
+
+        conta.deposito(1000);
+        conta.saque(100);
+        conta.pix(100, conta2);
+        conta.transferencia(100, conta2);
+        conta.historicoDeTransacao();
     }
 
 }
