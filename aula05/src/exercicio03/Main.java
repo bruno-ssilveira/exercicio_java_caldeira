@@ -10,37 +10,41 @@ public class Main {
 
         ArrayList<String> listaTarefas = new ArrayList<>();
 
-        System.out.println("""
-                Opções:
-                
-                a) Criar tarefa.
-                b) Exibir tarefas.
-                c) Remover tarefa.
-                
-                Digite a, b ou c:
-                """);
-        String opcao = leitor.nextLine();
+        boolean loop = true;
 
-        if (opcao.equals("a")) {
-            System.out.println("Digite o nome da tarefa:");
-            String nomeTarefa = leitor.nextLine();
+        while (loop) {
+            System.out.println("""
+                    Opções:
+                                        
+                    a) Criar tarefa.
+                    b) Exibir tarefas.
+                    c) Remover tarefa.
+                    d) Sair.
+                                        
+                    Digite a, b, c ou d:
+                    """);
+            String opcao = leitor.nextLine();
 
-            System.out.println("Digite a data para a tarefa:");
-            String dataTarefa = leitor.nextLine();
+            if (opcao.equals("a")) {
+                System.out.println("Digite o nome da tarefa:");
+                String nomeTarefa = leitor.nextLine();
 
-            System.out.println("Digite a descrição para a tarefa");
-            String descricaoTarefa = leitor.nextLine();
+                System.out.println("Digite a data para a tarefa:");
+                String dataTarefa = leitor.nextLine();
 
-            System.out.println("Tarefa adicionada!");
+                System.out.println("Digite a descrição para a tarefa");
+                String descricaoTarefa = leitor.nextLine();
 
-            listaTarefas.add("Tarefa: " + nomeTarefa + "\nData: " + dataTarefa + "\nDescrição: " + descricaoTarefa);
-        }
+                System.out.println("Tarefa adicionada!");
 
-        if (opcao.equals("b")) {
-            for (String tarefas : listaTarefas) {
-                System.out.println(listaTarefas.get(tarefas);
+                listaTarefas.add("Tarefa: " + nomeTarefa + "\nData: " + dataTarefa + "\nDescrição: " + descricaoTarefa);
+            } else if (opcao.equals("b")) {
+                for (String tarefas : listaTarefas) {
+                    System.out.println(tarefas);
+                }
+            } else if (opcao.equals("d")){
+                loop = false;
             }
         }
     }
-
 }
