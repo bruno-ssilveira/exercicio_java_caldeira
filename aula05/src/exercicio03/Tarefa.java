@@ -6,6 +6,18 @@ public class Tarefa {
     private String data;
     private String descricao;
 
+    public String getTitulo() {
+        return this.titulo;
+    }
+
+    public String getData() {
+        return this.data;
+    }
+
+    public String getDescricao() {
+        return this.descricao;
+    }
+
     public Tarefa(String titulo, String data, String descricao) {
         this.titulo = titulo;
         this.data = data;

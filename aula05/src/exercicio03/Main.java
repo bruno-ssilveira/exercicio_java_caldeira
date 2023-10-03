@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner leitor = new Scanner(System.in);
 
-        ArrayList<String> listaTarefas = new ArrayList<>();
+        ArrayList<Tarefa> listaTarefas = new ArrayList<>();
 
         boolean loop = true;
 
@@ -33,18 +33,34 @@ public class Main {
                     String dataTarefa = leitor.nextLine();
                     System.out.println("Digite a descrição para a tarefa");
                     String descricaoTarefa = leitor.nextLine();
+                    Tarefa tarefa = new Tarefa(nomeTarefa, dataTarefa, descricaoTarefa);
                     System.out.println("Tarefa adicionada!");
-                    listaTarefas.add("Tarefa: " + nomeTarefa + "\nData: " + dataTarefa + "\nDescrição: " + descricaoTarefa);
+                    listaTarefas.add(tarefa);
                 }
                 case "b" -> {
-                    for (String tarefas : listaTarefas) {
-                        System.out.println(tarefas);
+                    for (Tarefa tarefas : listaTarefas) {
+                        System.out.println("Tarefa: " + tarefas.getTitulo() + " -- " + "Data: " + tarefas.getData() + " -- " + "Descrição: " + tarefas.getDescricao());
                     }
+                    System.out.println(listaTarefas.get(0));
+                    System.out.println(listaTarefas.get(1));
                 }
                 case "c" -> {
-                    System.out.println("Digite entre aspas o nome da tarefa que deseja remover:");
+                    System.out.println("Digite o nome da tarefa a ser removida");
                     String remova = leitor.nextLine();
-                    listaTarefas.remove(remova);
+
+                    boolean removido = false;
+
+                    for (Tarefa i : listaTarefas) {
+                        if (i.getTitulo().equalsIgnoreCase(remova)) {
+                            listaTarefas.remove(i);
+                            System.out.println("Objeto removido!");
+                            removido = true;
+                        }
+                    }
+
+                    if (!removido) {
+                        System.out.println("Objeto não encontrado na lista.");
+                    }
                 }
                 case "d" -> loop = false;
             }
