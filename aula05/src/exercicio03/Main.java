@@ -1,6 +1,9 @@
 package exercicio03;
 
+import exercicio04.Compra;
+
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class Main {
@@ -42,17 +45,19 @@ public class Main {
                         System.out.println("Tarefa: " + tarefas.getTitulo() + " -- " + "Data: " + tarefas.getData() + " -- " + "Descrição: " + tarefas.getDescricao());
                     }
                     System.out.println(listaTarefas.get(0));
-                    System.out.println(listaTarefas.get(1));
                 }
                 case "c" -> {
                     System.out.println("Digite o nome da tarefa a ser removida");
                     String remova = leitor.nextLine();
 
+                    Iterator<Tarefa> iterator = listaTarefas.iterator();
+
                     boolean removido = false;
 
-                    for (Tarefa i : listaTarefas) {
-                        if (i.getTitulo().equalsIgnoreCase(remova)) {
-                            listaTarefas.remove(i);
+                    while (iterator.hasNext()) {
+                        Tarefa tarefa = iterator.next();
+                        if (tarefa.getTitulo().equalsIgnoreCase(remova)) {
+                            iterator.remove();
                             System.out.println("Objeto removido!");
                             removido = true;
                         }
