@@ -1,6 +1,6 @@
 package exercicio04;
 
-public class Calculadora implements Calculavel{
+public class Calculadora implements Calculavel {
 
 
     @Override
