@@ -1,8 +1,12 @@
 package exercicio04;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Calculadora implements Calculavel {
+
+    private int n1 = 0;
+    private int n2 = 0;
 
     enum Operacao {
         SOMAR,
@@ -18,106 +22,109 @@ public class Calculadora implements Calculavel {
 
         while (play) {
             System.out.println("""
+                    
+                    
                     CALCULADORA
                                     
                     Digite o calculo desejado: [somar, subtrair, multiplicar, dividir ou sair para finalizar.]
                     
                     """);
-            String tipoCalculo = leitor.nextLine().toUpperCase();
 
-            if (tipoCalculo.equals(Operacao.SOMAR.toString())) {
-                somar();
-            } else if (tipoCalculo.equals(Operacao.SUBTRAIR.toString())) {
-                System.out.println("Primeiro número: ");
-                int n1 = leitor.nextInt();
-                System.out.println("Segundo número: ");
-                int n2 = leitor.nextInt();
+            try {
+                String tipoCalculo = leitor.nextLine().toUpperCase();
 
-                int subtracao = n1 - n2;
-                System.out.println("A subtração entre " + n1 + " e " + n2 + " é " + subtracao);
-
-            } else if (tipoCalculo.equals(Operacao.MULTIPLICAR.toString())) {
-                System.out.println("Primeiro número: ");
-                int n1 = leitor.nextInt();
-                System.out.println("Segundo número: ");
-                int n2 = leitor.nextInt();
-
-                int multiplicacao = n1 * n2;
-                System.out.println("A multiplicação entre " + n1 + " e " + n2 + " é " + multiplicacao);
-
-            } else if (tipoCalculo.equals(Operacao.DIVIDIR.toString())) {
-                System.out.println("Primeiro número: ");
-                int n1 = leitor.nextInt();
-                System.out.println("Segundo número: ");
-                int n2 = leitor.nextInt();
-
-                int divisao = n1 / n2;
-                System.out.println("A divisão entre " + n1 + " e " + n2 + " é " + divisao);
-            } else if (tipoCalculo.equals("SAIR")) {
-                play = false;
+                if (tipoCalculo.equals(Operacao.SOMAR.toString())) {
+                    somar();
+                } else if (tipoCalculo.equals(Operacao.SUBTRAIR.toString())) {
+                    subtrair();
+                } else if (tipoCalculo.equals(Operacao.MULTIPLICAR.toString())) {
+                    multiplicar();
+                } else if (tipoCalculo.equals(Operacao.DIVIDIR.toString())) {
+                    dividir();
+                } else if (tipoCalculo.equals("SAIR")) {
+                    play = false;
+                } else {
+                    throw new IllegalArgumentException("Erro: a opção escolhida não é válida.");
+                }
+            } catch (IllegalArgumentException e) {
+                System.err.print(e.getMessage());
             }
         }
     }
 
     @Override
     public void somar() {
-        Scanner leitor = new Scanner(System.in);
-        System.out.println("Primeiro número: ");
-        int n1 = leitor.nextInt();
-        System.out.println("Segundo número: ");
-        int n2 = leitor.nextInt();
-
         try {
-            if (n1 > 0 && n2 > 0) {
-                int soma = n1 + n2;
-                System.out.println("A soma entre " + n1 + " e " + n2 + " é " + soma);
-            } else {
-                throw new IllegalArgumentException("Número digitado não é inteiro.");
-            }
-        } catch (IllegalArgumentException e) {
-            System.out.println("Erro: " + e.getMessage());
+            Scanner somar = new Scanner(System.in);
+            System.out.println("Primeiro número: ");
+            this.n1 = somar.nextInt();
+            System.out.println("Segundo número: ");
+            this.n2 = somar.nextInt();
+
+            int soma = n1 + n2;
+            System.out.println("A soma entre " + n1 + " + " + n2 + " é " + soma);
+
+        } catch (InputMismatchException e) {
+            System.err.println("Erro: número digitado não é inteiro.");
         }
     }
 
     @Override
     public void subtrair() {
-        Scanner leitor = new Scanner(System.in);
-        System.out.println("Primeiro número: ");
-        int n1 = leitor.nextInt();
-        System.out.println("Segundo número: ");
-        int n2 = leitor.nextInt();
+        try {
+            Scanner subtrair = new Scanner(System.in);
+            System.out.println("Primeiro número: ");
+            this.n1 = subtrair.nextInt();
+            System.out.println("Segundo número: ");
+            this.n2 = subtrair.nextInt();
 
-        int subtracao = n1 - n2;
-        System.out.println("A subtração entre " + n1 + " e " + n2 + " é " + subtracao);
+            int subtracao = n1 - n2;
+            System.out.println("A subtração entre " + n1 + " - " + n2 + " é " + subtracao);
 
-        leitor.close();
+        } catch (InputMismatchException e) {
+            System.err.println("Erro: número digitado não é inteiro.");
+        }
     }
 
     @Override
     public void multiplicar() {
-        Scanner leitor = new Scanner(System.in);
-        System.out.println("Primeiro número: ");
-        int n1 = leitor.nextInt();
-        System.out.println("Segundo número: ");
-        int n2 = leitor.nextInt();
+        try {
+            Scanner multiplicar = new Scanner(System.in);
+            System.out.println("Primeiro número: ");
+            this.n1 = multiplicar.nextInt();
+            System.out.println("Segundo número: ");
+            this.n2 = multiplicar.nextInt();
 
-        int multiplicacao = n1 * n2;
-        System.out.println("A multiplicação entre " + n1 + " e " + n2 + " é " + multiplicacao);
+            int multiplicacao = n1 * n2;
+            System.out.println("A multiplicação entre " + n1 + " x " + n2 + " é " + multiplicacao);
 
-        leitor.close();
+        } catch (InputMismatchException e) {
+            System.err.println("Erro: número digitado não é inteiro.");
+        }
     }
 
     @Override
     public void dividir() {
-        Scanner leitor = new Scanner(System.in);
-        System.out.println("Primeiro número: ");
-        int n1 = leitor.nextInt();
-        System.out.println("Segundo número: ");
-        int n2 = leitor.nextInt();
+        try {
+            Scanner dividir = new Scanner(System.in);
+            System.out.println("Primeiro número: ");
+            this.n1 = dividir.nextInt();
+            System.out.println("Segundo número: ");
+            this.n2 = dividir.nextInt();
 
-        int divisao = n1 / n2;
-        System.out.println("A divisão entre " + n1 + " e " + n2 + " é " + divisao);
+            try {
+                if (n2 != 0) {
+                    int divisao = n1 / n2;
+                    System.out.println("A divisão entre " + n1 + " / " + n2 + " é " + divisao);
+                } else {
+                    throw new IllegalArgumentException("Não é possível dividir por zero.");
+                }
+            } catch (IllegalArgumentException e) {
+                System.err.println("Erro: " + e.getMessage());
+            }
 
-        leitor.close();
+        } catch (InputMismatchException e) {
+            System.err.println("Erro: número digitado não é inteiro.");
+        }
     }
 }
