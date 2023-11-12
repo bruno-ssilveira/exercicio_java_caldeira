@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="CalculadoraTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2023-11-12T16:29:24" hostname="DESKTOP-PMVRVU3" time="0.034">
+  <properties/>
+  <testcase name="multiplicacaoComSucesso()" classname="CalculadoraTest" time="0.02"/>
+  <testcase name="potenciaComSucesso()" classname="CalculadoraTest" time="0.001"/>
+  <testcase name="subtracaoComSucesso()" classname="CalculadoraTest" time="0.001"/>
+  <testcase name="raizQuadradaComSucesso()" classname="CalculadoraTest" time="0.001"/>
+  <testcase name="divisaoComSucesso()" classname="CalculadoraTest" time="0.002"/>
+  <testcase name="somarComSucesso()" classname="CalculadoraTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
